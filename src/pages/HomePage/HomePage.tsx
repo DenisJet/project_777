@@ -1,7 +1,4 @@
-import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import { TOKEN } from "../../constants/token.constant";
-import { API_BASE_URL, API_ROUTES } from "../../constants/routes.constants";
 import ProductCard, {
   IProductCard,
 } from "../../components/ProductCard/ProductCard";
@@ -11,48 +8,21 @@ import {
   PaginationItem,
   PaginationLink,
 } from "../../components/ui/pagination";
-import { useToast } from "../../hooks/use-toast";
 import { sortProducts } from "../../helpers/sortProducts";
 import { Badge } from "../../components/ui/badge";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useFetchProducts } from "../../hooks/useGetProducts";
+import { useSort } from "../../hooks/useSort";
 
 export default function HomePage() {
   const [productsLimit, setProductsLimit] = useState(5);
   const [activePage, setActivePage] = useState(1);
-  const [products, setProducts] = useState([]);
-  const [sortField, setSortField] = useState("id");
-  const [sortDirection, setSortDirection] = useState("asc");
 
-  const { toast } = useToast();
+  const products = useFetchProducts(activePage, productsLimit);
+  const { sortField, setSortField, sortDirection, toggleSortDirection } =
+    useSort();
 
   // console.log("home-cookie:", document.cookie); // returns empty even though the token is set in cookies (remove after fixing)
-
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const response = await axios.get(
-          `${API_BASE_URL}${API_ROUTES.getProducts}?page=${activePage}&limit=${productsLimit}`,
-          {
-            headers: {
-              Authorization: TOKEN,
-            },
-          },
-        );
-
-        if (response.status === 200) {
-          setProducts(response.data.products);
-          toast({ title: "Данные успешно загружены" });
-        }
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          toast({ title: `Ошибка! ${error.response?.data.detail}` });
-          throw new Error(error.response?.data.message);
-        }
-      }
-    };
-
-    getProducts();
-  }, [activePage, productsLimit]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,14 +37,6 @@ export default function HomePage() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [productsLimit]);
-
-  const handleSortDirection = () => {
-    if (sortDirection === "asc") {
-      setSortDirection("desc");
-    } else {
-      setSortDirection("asc");
-    }
-  };
 
   return (
     <div className="p-2">
@@ -98,7 +60,7 @@ export default function HomePage() {
                 <option value="reviews_count">reviews_count</option>
                 <option value="barcode">barcode</option>
               </select>
-              <Badge onClick={handleSortDirection} className="cursor-pointer">
+              <Badge onClick={toggleSortDirection} className="cursor-pointer">
                 {sortDirection === "asc" ? <ChevronDown /> : <ChevronUp />}
               </Badge>
             </div>
