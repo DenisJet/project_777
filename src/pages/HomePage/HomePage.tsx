@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import ProductCard, {
   IProductCard,
 } from "../../components/ProductCard/ProductCard";
@@ -13,30 +13,15 @@ import { Badge } from "../../components/ui/badge";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useFetchProducts } from "../../hooks/useGetProducts";
 import { useSort } from "../../hooks/useSort";
+import { usePagination } from "../../hooks/usePagination";
 
 export default function HomePage() {
-  const [productsLimit, setProductsLimit] = useState(5);
-  const [activePage, setActivePage] = useState(1);
-
+  const { activePage, setActivePage, productsLimit } = usePagination();
   const products = useFetchProducts(activePage, productsLimit);
   const { sortField, setSortField, sortDirection, toggleSortDirection } =
     useSort();
 
   // console.log("home-cookie:", document.cookie); // returns empty even though the token is set in cookies (remove after fixing)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        if (productsLimit === 5) {
-          setProductsLimit(10);
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [productsLimit]);
 
   return (
     <div className="p-2">
