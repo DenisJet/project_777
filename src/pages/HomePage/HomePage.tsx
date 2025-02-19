@@ -14,6 +14,7 @@ import {
 import { useToast } from "../../hooks/use-toast";
 import { sortProducts } from "../../helpers/sortProducts";
 import { Badge } from "../../components/ui/badge";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function HomePage() {
   const [productsLimit, setProductsLimit] = useState(5);
@@ -97,8 +98,8 @@ export default function HomePage() {
                 <option value="reviews_count">reviews_count</option>
                 <option value="barcode">barcode</option>
               </select>
-              <Badge onClick={handleSortDirection} variant="outline">
-                {sortDirection}
+              <Badge onClick={handleSortDirection} className="cursor-pointer">
+                {sortDirection === "asc" ? <ChevronDown /> : <ChevronUp />}
               </Badge>
             </div>
           </div>
