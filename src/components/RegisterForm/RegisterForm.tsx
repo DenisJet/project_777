@@ -60,7 +60,6 @@ export default function RegisterForm() {
   });
 
   async function register(values: z.infer<typeof formSchema>) {
-    console.log("values", values);
     try {
       const response = await axios.post(`${API_BASE_URL}${API_ROUTES.signUp}`, {
         username: values.username,
