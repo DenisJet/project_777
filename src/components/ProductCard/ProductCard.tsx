@@ -29,10 +29,10 @@ export default function ProductCard({ card }: { card: IProductCard }) {
   };
 
   return (
-    <Card className="bg-slate-800 p-6 text-xs">
+    <Card className="bg-slate-800 p-6 text-sm">
       <div className="flex flex-wrap gap-4 justify-around">
         <img
-          className="max-w-[150px] max-h-[150px]"
+          className="max-w-[175px] max-h-[175px]"
           src={card.images[0]}
           onError={handleError}
           alt={card.name}
