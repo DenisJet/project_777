@@ -9,6 +9,7 @@ import { APP_ROUTES } from "./constants/routes.constants.ts";
 import { Toaster } from "./components/ui/toaster.tsx";
 import { RequireAuth } from "./helpers/requireAuth.tsx";
 import MainLayout from "./components/MainLayout/MainLayout.tsx";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -26,6 +27,7 @@ createRoot(document.getElementById("root")!).render(
         </Route>
         <Route path={APP_ROUTES.login} element={<LoginPage />} />
         <Route path={APP_ROUTES.register} element={<RegisterPage />} />
+        <Route path={APP_ROUTES.notFound} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
     <Toaster />
