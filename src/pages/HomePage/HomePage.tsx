@@ -2,9 +2,12 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { TOKEN } from "../../constants/token.constant";
 import { API_BASE_URL, API_ROUTES } from "../../constants/routes.constants";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
+
+  console.log("home-cookie:", document.cookie); // returns empty even though the token is set in cookies
 
   useEffect(() => {
     const getProducts = async () => {
@@ -35,13 +38,14 @@ export default function HomePage() {
 
   return (
     <div className="px-2">
-      Home Page
       {products && (
-        <div>
-          <h2>Products</h2>
-          {products.map((product) => {
-            return <p key={product.id}>{product.name}</p>;
-          })}
+        <div className="mb-6">
+          <h2 className="text-3xl font-semibold mb-6">Products</h2>
+          <div className="flex flex-wrap justify-center gap-6">
+            {products.map((product) => {
+              return <ProductCard card={product} key={product.id} />;
+            })}
+          </div>
         </div>
       )}
     </div>

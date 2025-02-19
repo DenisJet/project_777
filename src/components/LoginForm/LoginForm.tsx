@@ -69,6 +69,7 @@ export default function LoginForm() {
         toast({ title: response.data.message });
         navigate(APP_ROUTES.home);
         setError("");
+        console.log("login-cookie:", document.cookie); // returns empty even though the token is set in cookies (remove after fixing)
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -78,6 +79,8 @@ export default function LoginForm() {
       }
     }
   }
+
+  console.log("login-cookie:", document.cookie); // returns empty even though the token is set in cookies (remove after fixing)
 
   return (
     <div className="flex flex-col gap-6">
