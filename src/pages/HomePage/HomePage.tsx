@@ -7,6 +7,7 @@ import ProductCard, {
 } from "../../components/ProductCard/ProductCard";
 
 export default function HomePage() {
+  const [productsLimit, setProductsLimit] = useState(5);
   const [products, setProducts] = useState([]);
 
   console.log("home-cookie:", document.cookie); // returns empty even though the token is set in cookies
@@ -15,7 +16,7 @@ export default function HomePage() {
     const getProducts = async () => {
       try {
         const response = await axios.get(
-          `${API_BASE_URL}${API_ROUTES.getProducts}`,
+          `${API_BASE_URL}${API_ROUTES.getProducts}?page=1&limit=${productsLimit}`,
           {
             headers: {
               Authorization: TOKEN,
@@ -36,6 +37,20 @@ export default function HomePage() {
     };
 
     getProducts();
+  }, [productsLimit]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        if (productsLimit === 5) {
+          setProductsLimit(10);
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
