@@ -69,18 +69,18 @@ export default function LoginForm() {
         toast({ title: response.data.message });
         navigate(APP_ROUTES.home);
         setError("");
-        console.log("login-cookie:", document.cookie); // returns empty even though the token is set in cookies (remove after fixing)
+        // console.log("login-cookie:", document.cookie); // returns empty even though the token is set in cookies (remove after fixing)
       }
     } catch (error) {
       if (error instanceof AxiosError) {
         setError(error.response?.data.message);
-        toast({ title: error.response?.data.message });
+        toast({ title: `Ошибка! ${error.response?.data.message}` });
         throw new Error(error.response?.data.message);
       }
     }
   }
 
-  console.log("login-cookie:", document.cookie); // returns empty even though the token is set in cookies (remove after fixing)
+  // console.log("login-cookie:", document.cookie); // returns empty even though the token is set in cookies (remove after fixing)
 
   return (
     <div className="flex flex-col gap-6">

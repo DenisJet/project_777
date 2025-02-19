@@ -32,7 +32,7 @@ export default function LogoutButton() {
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        toast({ title: error.response?.data.detail });
+        toast({ title: `Ошибка! ${error.response?.data.detail}` });
         throw new Error(error.response?.data.message);
       }
     }
