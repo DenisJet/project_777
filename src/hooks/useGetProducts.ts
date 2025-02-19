@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { TOKEN } from "../constants/token.constant";
 import { API_BASE_URL, API_ROUTES } from "../constants/routes.constants";
 import { IProductCard } from "../components/ProductCard/ProductCard";
-import { useToast } from "./use-toast";
+import { useToast } from "./useToast";
 
 export const useFetchProducts = (activePage: number, productsLimit: number) => {
   const [products, setProducts] = useState<IProductCard[]>([]);

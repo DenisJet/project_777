@@ -5,7 +5,7 @@ import {
   API_ROUTES,
   APP_ROUTES,
 } from "../../constants/routes.constants";
-import { useToast } from "../../hooks/use-toast";
+import { useToast } from "../../hooks/useToast";
 import { useNavigate } from "react-router";
 import { TOKEN } from "../../constants/token.constant";
 

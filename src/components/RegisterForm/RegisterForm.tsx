@@ -31,7 +31,7 @@ import {
 import { useState } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { useNavigate } from "react-router";
-import { useToast } from "../../hooks/use-toast";
+import { useToast } from "../../hooks/useToast";
 
 const formSchema = z.object({
   username: z
