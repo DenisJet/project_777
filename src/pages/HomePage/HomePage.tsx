@@ -8,6 +8,7 @@ import { useFetchProducts } from "../../hooks/useGetProducts";
 import { useSort } from "../../hooks/useSort";
 import { usePagination } from "../../hooks/usePagination";
 import PaginationComponent from "../../components/Pagination/Pagination";
+import Select from "../../components/Select/Select";
 
 export default function HomePage() {
   const { activePage, setActivePage, productsLimit } = usePagination();
@@ -25,20 +26,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-semibold mb-2">Products</h2>
             <div className="flex items-center gap-1">
               <p>Sorted by:</p>
-              <select
-                name="select"
-                className="bg-slate-700 cursor-pointer rounded-md"
-                onChange={(e) => setSortField(e.target.value)}
-              >
-                <option value="id">id</option>
-                <option value="name">name</option>
-                <option value="price">price</option>
-                <option value="stock">stock</option>
-                <option value="brand">brand</option>
-                <option value="rating">rating</option>
-                <option value="reviews_count">reviews_count</option>
-                <option value="barcode">barcode</option>
-              </select>
+              <Select setSortField={setSortField} />
               <Badge onClick={toggleSortDirection} className="cursor-pointer">
                 {sortDirection === "asc" ? <ChevronDown /> : <ChevronUp />}
               </Badge>
