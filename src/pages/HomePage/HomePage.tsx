@@ -1,19 +1,13 @@
-// import { useEffect, useState } from "react";
 import ProductCard, {
   IProductCard,
 } from "../../components/ProductCard/ProductCard";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-} from "../../components/ui/pagination";
 import { sortProducts } from "../../helpers/sortProducts";
 import { Badge } from "../../components/ui/badge";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useFetchProducts } from "../../hooks/useGetProducts";
 import { useSort } from "../../hooks/useSort";
 import { usePagination } from "../../hooks/usePagination";
+import PaginationComponent from "../../components/Pagination/Pagination";
 
 export default function HomePage() {
   const { activePage, setActivePage, productsLimit } = usePagination();
@@ -59,55 +53,10 @@ export default function HomePage() {
           </div>
         </div>
       )}
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationLink
-              className="cursor-pointer"
-              isActive={activePage === 1}
-              onClick={() => setActivePage(1)}
-            >
-              1
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink
-              className="cursor-pointer"
-              isActive={activePage === 2}
-              onClick={() => setActivePage(2)}
-            >
-              2
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink
-              className="cursor-pointer"
-              isActive={activePage === 3}
-              onClick={() => setActivePage(3)}
-            >
-              3
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink
-              className="cursor-pointer"
-              isActive={activePage === 4}
-              onClick={() => setActivePage(4)}
-            >
-              4
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink
-              className="cursor-pointer"
-              isActive={activePage === 5}
-              onClick={() => setActivePage(5)}
-            >
-              5
-            </PaginationLink>
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+      <PaginationComponent
+        activePage={activePage}
+        setActivePage={setActivePage}
+      />
     </div>
   );
 }
