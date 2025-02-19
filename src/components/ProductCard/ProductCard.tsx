@@ -1,13 +1,6 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card } from "../ui/card";
 
-export interface ProductCard {
+export interface IProductCard {
   id: number;
   name: string;
   description: string;
@@ -30,7 +23,7 @@ export interface ProductCard {
   barcode: string;
 }
 
-export default function ProductCard({ card }: { card: ProductCard }) {
+export default function ProductCard({ card }: { card: IProductCard }) {
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.src = "/default.png";
   };

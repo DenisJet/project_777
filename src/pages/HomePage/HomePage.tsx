@@ -2,7 +2,9 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { TOKEN } from "../../constants/token.constant";
 import { API_BASE_URL, API_ROUTES } from "../../constants/routes.constants";
-import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductCard, {
+  IProductCard,
+} from "../../components/ProductCard/ProductCard";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
@@ -42,7 +44,7 @@ export default function HomePage() {
         <div className="mb-6">
           <h2 className="text-3xl font-semibold mb-6">Products</h2>
           <div className="flex flex-wrap justify-center gap-6">
-            {products.map((product) => {
+            {products.map((product: IProductCard) => {
               return <ProductCard card={product} key={product.id} />;
             })}
           </div>
