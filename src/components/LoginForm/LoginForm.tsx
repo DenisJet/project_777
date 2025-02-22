@@ -30,8 +30,8 @@ import {
 } from "../../constants/routes.constants";
 import { useState } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { useNavigate } from "react-router";
 import { useToast } from "../../hooks/useToast";
+import { useAuth } from "../../hooks/useAuth";
 
 const formSchema = z.object({
   username: z
@@ -45,9 +45,9 @@ const formSchema = z.object({
 
 export default function LoginForm() {
   const [error, setError] = useState<string>("");
-
-  const navigate = useNavigate();
   const { toast } = useToast();
+
+  useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -67,7 +67,6 @@ export default function LoginForm() {
       if (response.status === 200) {
         localStorage.setItem("isAuth", "true");
         toast({ title: response.data.message });
-        navigate(APP_ROUTES.home);
         setError("");
         // console.log("login-cookie:", document.cookie); // returns empty even though the token is set in cookies (remove after fixing)
       }
