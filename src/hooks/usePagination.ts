@@ -4,10 +4,6 @@ export const usePagination = () => {
   const [activePage, setActivePage] = useState(1);
   const [productsLimit, setProductsLimit] = useState(5);
 
-  const handlePageChange = (page: number) => {
-    setActivePage(page);
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
@@ -23,7 +19,7 @@ export const usePagination = () => {
 
   return {
     activePage,
-    setActivePage: handlePageChange,
+    setActivePage,
     productsLimit,
     setProductsLimit,
   };
