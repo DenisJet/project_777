@@ -28,9 +28,8 @@ import {
   API_ROUTES,
   APP_ROUTES,
 } from "../../constants/routes.constants";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { useNavigate } from "react-router";
 import { useToast } from "../../hooks/useToast";
 import { useAuth } from "../../hooks/useAuth";
 
